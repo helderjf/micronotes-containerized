@@ -1,0 +1,26 @@
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">{{note.title}}</h1>
+      <hr>
+      <!-- <p class="lead" style="white-space: pre-wrap;" innerHTML={{note.text}}></p> -->
+      <quill-editor [(ngModel)]="note.text" [styles]='quillEditorStyle' [readOnly]="true" [modules]="{toolbar:false}"></quill-editor>
+      <h3></h3>
+      <div class="space"></div>
+      <h5 class="subtitle mb-2 text-muted">Created on : {{note.dateCreated | date : 'medium' }}</h5>
+      <h5 class="subtitle mb-2 text-muted">Last edited on : {{note.dateEdited | date : 'medium'}}</h5>
+      <div class="btn-group view-buttons">
+          <button type="button" class="btn btn-primary btn-lg" (click)="goBack()">Back</button>
+          <button type="button" class="btn btn-outline-primary btn-lg" (click)="edit()">edit</button>
+          <button type="button" class="btn btn-outline-danger btn-lg" (click)="delete()">delete</button>
+        </div>
+      </div>
+  </div>
+
+
+
+
+  <!-- <div class="form-group">
+    <label for="inputText" class="sr-only">Text</label>
+    <quill-editor name="text" type="text" id="inputText" [formControlName]="'text'"
+    [styles]="quillEditorStyle" placeholder="Your note..." [required]="true" [readOnly]="true" [modules]="{toolbar:false}"></quill-editor>
+  </div> -->

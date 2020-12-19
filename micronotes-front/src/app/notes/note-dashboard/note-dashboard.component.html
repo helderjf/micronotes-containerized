@@ -1,0 +1,36 @@
+<div class="container">
+  <!-- <h1>Your notes</!--> 
+  <hr>
+
+  <div class="card-columns">
+    
+    <!-- new note -->
+    <a routerLink="/note/create" routerLinkActive="router-link-active">
+      <div class="card bg-light">
+        <div class="card-body text-center">
+          <h3>New note...</h3>
+          <img src="assets/img/addnote.png" alt="add note">
+          <!-- <h5>Take a note.</h5> -->
+        </div>
+      </div>
+    </a>
+
+    <!-- existing notes -->
+    <ng-container *ngFor="let note of notesArray">
+      <div class="card bg-light">
+        <div class="card-body text-center">
+          <h3>{{note.title}}</h3>
+          <hr>
+          <quill-editor [(ngModel)]="note.text" [styles]='quillEditorStyle' [readOnly]="true" [modules]="{toolbar:false}"></quill-editor>
+          <h3></h3>
+          <h6 class="text-muted">{{note.dateEdited | date : 'medium'}}</h6>
+          <div class="btn-group flex-wrap" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary btn-sm card-link" (click)="view(note.id)">view</button>
+            <button type="button" class="btn btn-outline-primary btn-sm card-link" (click)="edit(note.id)">edit</button>
+            <button type="button" class="btn btn-outline-danger btn-sm card-link" (click)="delete(note.id)">delete</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

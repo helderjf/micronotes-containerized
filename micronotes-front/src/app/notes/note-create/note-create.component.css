@@ -1,0 +1,12 @@
+.md-textarea{
+    width: 100%;
+    min-height: 300px;
+}
+
+.create-note{
+    max-width: 1000px;
+}
+
+h1 {
+    margin-top: 15px;
+  }

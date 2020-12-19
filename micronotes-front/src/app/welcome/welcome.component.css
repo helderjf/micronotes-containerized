@@ -1,0 +1,19 @@
+.image {
+    height: 100%;
+    background-size: cover;
+    width: 100%;
+    background-image: url('../../assets/img/background3.jpg');
+    background-position: 50% 50%;
+
+}
+
+.welcome {
+    color: white;
+    /* font-size: 50px; */
+    text-shadow: -1px 1px 0 black, 1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black;
+    text-align: center;
+}
+
+.container{
+    padding-top: 50px;
+}
