@@ -1,0 +1,51 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3'
+
+#Define services
+services:
+
+  #PostgreSQL Database for the application
+  micronotes-postgres:
+    image: "postgres:13.1-alpine"
+    container_name: micronotes-postgres
+    #Volume mounted for database for the storage
+    volumes:
+      - micronotes-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432 # Forward the exposed port 5432 on the container to port 5432 on the host machine
+
+    #Environment variable for DB name, user and password
+    environment:
+      - POSTGRES_DB=micronotesDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+
+  #Back-end Spring Boot Application
+  micronotes-back:
+    #The docker file in micronotes-back build the jar and provides the docker image with the following name.
+    build: ./micronotes-back
+    container_name: micronotes-back
+
+    #Environment variables for Spring Boot Application.
+    environment:
+      - DB_SERVER=micronotes-postgres
+      - POSTGRES_DB=micronotesDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    links:
+      - micronotes-postgres
+
+  #Fron-end Angular Application
+  micronotes-front:
+    build: ./micronotes-front
+    container_name: micronotes-front
+    ports:
+      - 4200:80
+    links:
+      - micronotes-back
+
+#Volumes for DB data
+volumes:
+  micronotes-data:
